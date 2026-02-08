@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Maaaalu 💖</title>
+  <style>
+    :root{
+      --bg1:#ff2f79;
+      --bg2:#ffd1e6;
+      --card:#ffffffea;
+      --text:#1a1a1a;
+      --pink:#b80b46;
+      --yes:#22c55e;
+      --no:#ef4444;
+      --shadow: 0 26px 80px rgba(0,0,0,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 20%, #fff7, transparent 60%),
+        radial-gradient(900px 600px at 85% 25%, #fff6, transparent 55%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      overflow:hidden;
+    }
+
+    /* floating background hearts */
+    .bgHeart{
+      position:fixed;
+      bottom:-40px;
+      font-size:20px;
+      opacity:.16;
+      animation: floatBg linear forwards;
+      pointer-events:none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+    }
+    @keyframes floatBg{
+      0%{ transform: translateY(0) rotate(0deg); opacity:0; }
+      10%{ opacity:.16; }
+      100%{ transform: translateY(-120vh) rotate(360deg); opacity:0; }
+    }
+
+    .card{
+      width:min(820px, 92vw);
+      padding:18px 18px 16px;
+      border-radius:30px;
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      box-shadow:var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+      text-align:center;
+      position:relative;
+    }
+
+    .topRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:9px 12px;
+      border-radius:999px;
+      background:#fff;
+      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+      font-weight:1000;
+      user-select:none;
+      white-space:nowrap;
+      font-size:13px;
+    }
+    .musicBtn{
+      border:0;
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:1000;
+      cursor:pointer;
+      background:#111;
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(0,0,0,.16);
+      user-select:none;
+    }
+    .musicBtn:active{transform:scale(.98)}
+
+    h1{
+      margin: 8px 0 4px;
+      font-size: clamp(26px, 4vw, 46px);
+      line-height:1.12;
+      letter-spacing:-.3px;
+      color:var(--pink);
+    }
+    .subtitle{
+      margin:0 0 12px;
+      opacity:.82;
+      font-size:15px;
+    }
+
+    /* quiz */
+    .quizWrap{
+      width:min(640px, 92vw);
+      margin: 10px auto 0;
+      text-align:left;
+    }
+    .quizCard{
+      background: linear-gradient(180deg, #fff, #fff3f9);
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:22px;
+      padding:16px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+    }
+    .qTitle{
+      font-weight:1100;
+      font-size:18px;
+      margin-bottom:10px;
+    }
+    .options{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .opt{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, filter .12s ease;
+      font-weight:950;
+    }
+    .opt:hover{filter:brightness(1.02)}
+    .opt:active{transform:scale(.99)}
+    .pill{
+      font-size:12px;
+      opacity:.75;
+      font-weight:900;
+      background:#f3f4f6;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .tiny{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.65;
+      text-align:center;
+    }
+
+    /* Valentine ask */
+    .askWrap{
+      display:none;
+      width:min(680px, 92vw);
+      margin: 10px auto 0;
+    }
+    .loveBox{
+      background: linear-gradient(180deg, #fff, #fff0);
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:24px;
+      padding:16px 14px 14px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+    }
+    .loveText{
+      font-size:15px;
+      opacity:.9;
+      line-height:1.6;
+      margin: 10px 6px 6px;
+      text-align:center;
+    }
+
+    /* Buttons stacked (no overlap) */
+    .buttons{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      padding:14px 0 4px;
+      min-height:170px;
+    }
+    button{
+      border:0;
+      border-radius:18px;
+      font-weight:1000;
+      cursor:pointer;
+      box-shadow: 0 16px 30px rgba(0,0,0,.18);
+      transition: transform .14s ease, filter .14s ease, opacity .14s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transform-origin:center;
+    }
+    button:hover{filter:brightness(1.03)}
+    button:active{transform: scale(.98)}
+
+    #yesBtn{
+      background: var(--yes);
+      color:#fff;
+      padding: 16px 26px;
+      font-size: 18px;
+      min-width: 220px;
+    }
+    #noBtn{
+      background: var(--no);
+      color:#fff;
+      padding: 14px 22px;
+      font-size: 16px;
+      min-width: 230px;
+      border-radius:999px;
+    }
+
+    /* toast popup (wrong answers + small notifications) */
+    .toast{
+      position:fixed;
+      left:50%;
+      top:18px;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(17,17,17,.92);
+      color:#fff;
+      padding:12px 14px;
+      border-radius:16px;
+      font-weight:950;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+      max-width: min(92vw, 680px);
+      text-align:center;
+      z-index:50;
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* hearts burst */
+    .heart{
+      position:fixed;
+      width:14px;height:14px;
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.95);
+      border-radius: 3px;
+      pointer-events:none;
+      animation: floatUp 1.6s linear forwards;
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,.16));
+      z-index:40;
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:14px;height:14px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart:before{left:-7px; top:0}
+    .heart:after{left:0; top:-7px}
+    @keyframes floatUp{
+      0%{opacity:0; transform: translateY(0) rotate(45deg) scale(.9)}
+      10%{opacity:1}
+      100%{opacity:0; transform: translateY(-220px) rotate(45deg) scale(1.2)}
+    }
+
+    /* success overlay */
+    .overlay{
+      position:fixed;
+      inset:0;
+      display:grid;
+      place-items:center;
+      background: rgba(0,0,0,.45);
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      padding:22px;
+      z-index:60;
+    }
+    .overlay.show{opacity:1; pointer-events:auto;}
+    .box{
+      width:min(640px, 92vw);
+      background:#fff;
+      border-radius:28px;
+      padding:22px;
+      text-align:center;
+      box-shadow: var(--shadow);
+    }
+    .box h2{
+      margin:10px 0 6px;
+      font-size: clamp(22px, 3.4vw, 36px);
+      color:var(--pink);
+    }
+    .box p{margin:0; opacity:.9; line-height:1.6}
+    .small{margin-top:10px; font-size:12px; opacity:.65}
+  </style>
+</head>
+
+<body>
+  <div class="toast" id="toast"></div>
+
+  <audio id="bgm" preload="auto" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_6c31c1fbe6.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <div class="topRow">
+      <div class="badge">💖 For Maaaalu</div>
+      <button class="musicBtn" id="musicBtn">▶ Play</button>
+    </div>
+
+    <h1 id="mainTitle">Maaaalu… quick quiz 😌💘</h1>
+    <p class="subtitle" id="mainSub">Tap one option. No “Next” button. Instant judgement 😭</p>
+
+    <!-- QUIZ -->
+    <div class="quizWrap" id="quizWrap">
+      <div class="quizCard">
+        <div class="qTitle" id="qTitle"></div>
+        <div class="options" id="options"></div>
+        <div class="tiny">One tap = final answer (but you can try again if you’re wrong 😏)</div>
+      </div>
+    </div>
+
+    <!-- VALENTINE ASK -->
+    <div class="askWrap" id="askWrap">
+      <div class="loveBox">
+        <h1 style="margin:6px 0 0; color:var(--pink);">Maaaalu, will you be my Valentine? 💖</h1>
+        <div class="loveText">
+          I don’t know how you did it, but you became my favourite part of everything.
+          <br><br>
+          When I’m with you, the world feels softer. I feel calmer. Happier.
+          Like my heart is finally where it’s supposed to be.
+          <br><br>
+          I want to love you loudly and gently at the same time —
+          in the small things, in the big things, in every day.
+          <br><br>
+          So tell me… can I call you mine this Valentine’s? 😌💘
+        </div>
+
+        <div class="buttons">
+          <button id="yesBtn">YES 💚</button>
+          <button id="noBtn">No ❤️</button>
+        </div>
+
+        <div class="tiny">“No” shrinks every time. “Yes” grows every time. Don’t test me 😭</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="success">
+    <div class="box">
+      <div style="font-size:46px">💖✨</div>
+      <h2>YAYYY, Maaaalu 💘</h2>
+      <p>
+        Okay… it’s official. You’re my Valentine now 😌<br>
+        I’m going to love you properly — the way you deserve.
+      </p>
+      <div class="small">Tap outside to close.</div>
+    </div>
+  </div>
+
+<script>
+  // ---------------- MUSIC ----------------
+  const bgm = document.getElementById("bgm");
+  const musicBtn = document.getElementById("musicBtn");
+  let playing = false;
+
+  function tryPlayMusic(){
+    if(playing) return;
+    bgm.play().then(()=>{
+      playing = true;
+      musicBtn.textContent = "⏸ Pause";
+    }).catch(()=>{});
+  }
+
+  musicBtn.addEventListener("click", async ()=>{
+    try{
+      if(!playing){
+        await bgm.play();
+        playing = true;
+        musicBtn.textContent = "⏸ Pause";
+      }else{
+        bgm.pause();
+        playing = false;
+        musicBtn.textContent = "▶ Play";
+      }
+    }catch(e){
+      musicBtn.textContent = "Tap again";
+    }
+  });
+
+  // ---------------- BACKGROUND HEARTS ----------------
+  setInterval(() => {
+    for (let i=0;i<2;i++){
+      const h = document.createElement("div");
+      h.className = "bgHeart";
+      h.textContent = ["💗","💖","💞","💘"][Math.floor(Math.random()*4)];
+      h.style.left = (Math.random()*100) + "vw";
+      h.style.animationDuration = (6 + Math.random()*6) + "s";
+      h.style.fontSize = (14 + Math.random()*22) + "px";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 13000);
+    }
+  }, 900);
+
+  // ---------------- TOAST POPUP ----------------
+  const toast = document.getElementById("toast");
+  let toastTimer = null;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>toast.classList.remove("show"), 1500);
+  }
+
+  // NOTE: You asked for a violent phrase. I can't do threats,
+  // but these keep the same funny-dramatic vibe.
+  const wrongMsgsQ1 = [
+    "WRONG 😭 You’re in trouble after this.",
+    "Nahhh 😶 Try again before I start sulking.",
+    "Wrong answer = 1 hour of extra teasing 😌",
+    "I’m calling the Valentine police 🚨💘 Try again."
+  ];
+  const wrongMsgsQ2 = [
+    "EXCUSE ME?? 😭 That’s not it. Again.",
+    "Wrong 😤 I’m stealing your fries for that.",
+    "Nope 😶 You owe me 3 hugs for that answer.",
+    "You’re lucky I’m obsessed with you 💖 Try again."
+  ];
+
+  // ---------------- QUIZ (ONE-CLICK) ----------------
+  const quizWrap = document.getElementById("quizWrap");
+  const askWrap = document.getElementById("askWrap");
+  const optionsEl = document.getElementById("options");
+  const qTitle = document.getElementById("qTitle");
+  const mainTitle = document.getElementById("mainTitle");
+  const mainSub = document.getElementById("mainSub");
+
+  const quiz = [
+    {
+      title: "1) Where did we 1st meet?",
+      options: ["UK", "Birmingham", "Airport", "None of the above"],
+      correct: "Airport",
+      wrongPool: wrongMsgsQ1
+    },
+    {
+      title: "2) How do I call you the most?",
+      options: ["Bujuk Bujuk", "Chellooo", "Cute ass", "Maaluu"],
+      correct: "Chellooo",
+      wrongPool: wrongMsgsQ2
+    }
+  ];
+
+  let step = 0;
+
+  function renderQuestion(){
+    const q = quiz[step];
+    qTitle.textContent = q.title;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(opt => {
+      const btn = document.createElement("div");
+      btn.className = "opt";
+      btn.innerHTML = `<span>${opt}</span><span class="pill">tap</span>`;
+
+      btn.addEventListener("click", ()=>{
+        tryPlayMusic();
+
+        if(opt !== q.correct){
+          const msg = q.wrongPool[Math.floor(Math.random()*q.wrongPool.length)];
+          showToast(msg);
+          return; // stay on same question
+        }
+
+        // correct: go next immediately
+        showToast("Correct 😌✅");
+        step++;
+
+        if(step < quiz.length){
+          renderQuestion();
+        }else{
+          // show valentine ask
+          quizWrap.style.display = "none";
+          askWrap.style.display = "block";
+          mainTitle.textContent = "Okay… you passed 😌💖";
+          mainSub.textContent = "Now answer the real question.";
+        }
+      });
+
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  renderQuestion();
+
+  // ---------------- VALENTINE BUTTONS ----------------
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn  = document.getElementById("noBtn");
+  const success = document.getElementById("success");
+
+  let noCount = 0;
+
+  function setYesSize(mult){
+    // Grow safely by increasing padding/font-size (no overlap because stacked)
+    const baseFont = 18, basePadY = 16, basePadX = 26;
+    const font = Math.min(baseFont + mult * 3.2, 46);
+    const padY = Math.min(basePadY + mult * 3.1, 44);
+    const padX = Math.min(basePadX + mult * 6.5, 100);
+
+    yesBtn.style.fontSize = font + "px";
+    yesBtn.style.padding = `${padY}px ${padX}px`;
+    yesBtn.style.minWidth = Math.min(220 + mult * 55, 620) + "px";
+  }
+
+  function setNoSize(mult){
+    // Shrink gradually
+    const baseFont = 16, basePadY = 14, basePadX = 22;
+    const font = Math.max(baseFont - mult * 1.7, 10);
+    const padY = Math.max(basePadY - mult * 1.5, 6);
+    const padX = Math.max(basePadX - mult * 3.0, 10);
+
+    noBtn.style.fontSize = font + "px";
+    noBtn.style.padding = `${padY}px ${padX}px`;
+    noBtn.style.minWidth = Math.max(230 - mult * 40, 90) + "px";
+    noBtn.style.opacity = Math.max(1 - mult * 0.11, 0.25);
+  }
+
+  const noLines = [
+    "No ❤️",
+    "Are you sure? 😭",
+    "Maaaalu pls 😶",
+    "Don’t do this to me 🥲",
+    "I’m going to cry fr 💔",
+    "Okay… that’s illegal 🚨💘",
+    "No is getting weak…",
+    "No is basically gone 💀"
+  ];
+
+  function burstHearts(n=85){
+    for(let i=0;i<n;i++){
+      const h=document.createElement("div");
+      h.className="heart";
+      h.style.left=(Math.random()*100)+"vw";
+      h.style.bottom=(Math.random()*22)+"vh";
+      h.style.animationDelay=(Math.random()*0.35)+"s";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 1800);
+    }
+  }
+
+  function handleNo(){
+    tryPlayMusic();
+    noCount++;
+    noBtn.textContent = noLines[Math.min(noCount, noLines.length-1)];
+    setYesSize(noCount);
+    setNoSize(noCount);
+
+    if(noCount >= 8){
+      noBtn.disabled = true;
+      showToast("No has left the chat 😭");
+    }
+  }
+
+  noBtn.addEventListener("click", handleNo);
+  noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); handleNo(); }, {passive:false});
+
+  yesBtn.addEventListener("click", ()=>{
+    tryPlayMusic();
+    burstHearts(95);
+    success.classList.add("show");
+  });
+
+  success.addEventListener("click", (e)=>{
+    if(e.target === success) success.classList.remove("show");
+  });
+</script>
+</body>
+</html>
